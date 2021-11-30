@@ -1,0 +1,8 @@
+SELECT
+    UDF.parseJson(UDF.base64decode(GetArrayElement(inferences, 0).other.contentBytes)).created as created,
+    GetArrayElement(UDF.parseJson(UDF.base64decode(GetArrayElement(inferences, 0).other.contentBytes)).predictions, 0).tagName as tagname,
+    GetArrayElement(UDF.parseJson(UDF.base64decode(GetArrayElement(inferences, 0).other.contentBytes)).predictions, 0).probability as probability
+INTO
+    [blob]
+FROM
+    [iothub]
